@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast</title>
+    <link rel="stylesheet" href="getStyle.css">
+</head>
+<body style="
+    display: flex;
+    flex-direction: column;
+    align-items: center;">
+    <h1>Weather Forecast</h1>
+    <div>
+        <button>HORSENS</button>
+        <button>AARHUS</button>
+        <button>COPENHAGEN</button>
+    </div>
+    <div id="latestMeasurements" style="margin-top: 24px; background-color: antiquewhite;">
+        <h3>Latest Measurements</h3>
+        <div style="
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;">
+            <div >
+                <h4>Temperature: </h4>
+                <textarea rows="1" disabled> 44</textarea>
+            </div>
+            <div>
+                <h4>Precipitation: </h4>
+                <textarea rows="1" disabled> 44</textarea>
+            </div>
+            <div>
+                <h4>Wind Speed: </h4>
+                <textarea rows="1" disabled> 44</textarea>
+            </div>
+            <div>
+                <h4>Cloud Coverage: </h4>
+                <textarea rows="1" disabled> 44</textarea>
+            </div>
+        </div>
+    </div>
+    <div id="lastDay" style="margin-top: 24px; background-color: aliceblue;">
+        <h3>Last Day</h3>
+        <div style="
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                ">
+            <div>
+                <h4>Maximum Temperature: </h4>
+                <textarea rows="1" disabled> 44</textarea>
+            </div>
+            <div>
+                <h4>Minimum Temperature: </h4>
+                <textarea rows="1" disabled> 44</textarea>
+            </div>
+            <div>
+                <h4>Total Precipitation: </h4>
+                <textarea rows="1" disabled> 44</textarea>
+            </div>
+            <div>
+                <h4>Average Wind Speed: </h4>
+                <textarea rows="1" disabled> 44</textarea>
+            </div>
+        </div>
+    </div>
+    <div id="forecast" style="margin-top: 24px; background-color: rgb(134, 205, 123);">
+        <h3>Forecast (Next 24 Hours)</h3>
+        <div class='forecastTableDiv'>
+        
+        </div>
+    </div>
+    
+    <script src="get.js"></script>
+</body>
+</html>
