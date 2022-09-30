@@ -1,0 +1,32 @@
+.forecastTable {
+    padding: 0;
+    margin: auto;
+    border-collapse: collapse;
+    width: 80%;
+    text-align: center;
+    
+}
+
+.forecastTableHeaderRow {
+    color: rgb(101, 57, 3);
+    font-weight: bold;
+    height: 50px;
+    width: 150px;
+}
+
+.forecastTableBodyRow:nth-child(odd) {
+    background-color: rgba(128, 128, 128, 0.050);
+}
+
+/* #latestUserScore {
+    background-color: crimson;
+} */
+
+.forecastTableBodyRow:hover {
+    background-color: darkorange;
+}
+
+.forecastTable tr td {
+    height: 25px;
+    width: 150px;
+}
