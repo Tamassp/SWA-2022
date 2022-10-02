@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Forecast - Send data to the server</title>
+    <script src="post.js"></script>
+    <script src="post-fetch.js"></script>
+  </head>
+  <body>
+    <div class="box">
+
+      <form action="">
+        <fieldset>
+          <legend><b>Temperature - °C</b></legend>
+          <p>City:</p>
+          <input type="radio" name="place" id="Horsens1" value="Horsens">
+          <label for="Horsens1">Horsens</label>
+          <input type="radio" name="place" id="Aarhus1" value="Aarhus">
+          <label for="Aarhus1">Aarhus</label>
+          <input type="radio" name="place" id="Copenhagen1" value="Copenhagen">
+          <label for="Copenhagen1">Copenhagen</label>
+          <br />
+          <br />
+          <div class="inputBox">
+            <input type="date" name="time" id="time-temperature" required/>
+            <label for="date">Date</label>
+          </div>
+          <br>
+          <div class="inputBox">
+            <input type="number" name="value" id="value-temperature" required/>
+            <label for="value-temperature"> °C </label>
+          </div>
+          <br>
+          <button onclick="sendTemperatureXML()">Send (XMLHttpRequest)</button>
+          <button onclick="sendTemperatureFetch()">Send (Fetch)</button>
+        </fieldset>
+      </form>
+
+      <br>
+
+      <!-- <form action="">
+        <fieldset>
+          <legend><b>Precipitation - mm</b></legend>
+          <p>City:</p>
+          <input type="radio" name="place" id="Horsens2" value="Horsens">
+          <label for="Horsens2">Horsens</label>
+          <input type="radio" name="place" id="Aarhus2" value="Aarhus">
+          <label for="Aarhus2">Aarhus</label>
+          <input type="radio" name="place" id="Copenhagen2" value="Copenhagen">
+          <label for="Copenhagen2">Copenhagen</label>
+          <br />
+          <p>Precipitation type:</p>
+          <input type="radio" name="precipitation-type" id="rain" value="rain">
+          <label for="rain">Rain</label>
+          <input type="radio" name="precipitation-type" id="sleet" value="sleet">
+          <label for="sleet">Sleet</label>
+          <input type="radio" name="precipitation-type" id="hail" value="hail">
+          <label for="hail">Hail</label>
+          <input type="radio" name="precipitation-type" id="snow" value="snow">
+          <label for="snow">Snow</label>
+          <br>
+          <br>
+          <div class="inputBox">
+            <input type="date" name="date" id="date" class="inputData" required/>
+            <label for="date">Date</label>
+          </div>
+          <br>
+          <div class="inputBox">
+            <input type="number" name="value" id="value-precipitation" class="inputData" required/>
+            <label for="value">mm </label>
+          </div>
+          <br>
+          <button onclick="sendXML()">Send (XMLHttpRequest)</button>
+          <button onclick="sendFetch()">Send (Fetch)</button>
+        </fieldset>
+      </form>
+
+      <br>
+
+      <form action="">
+        <fieldset>
+          <legend><b>Wind speed - m/s</b></legend>
+          <p>City:</p>
+          <input type="radio" name="place" id="Horsens3" value="Horsens">
+          <label for="Horsens3">Horsens</label>
+          <input type="radio" name="place" id="Aarhus3" value="Aarhus">
+          <label for="Aarhus3">Aarhus</label>
+          <input type="radio" name="place" id="Copenhagen3" value="Copenhagen">
+          <label for="Copenhagen3">Copenhagen</label>
+          <br>
+
+          <p>Wind Direction:</p>
+          <input type="checkbox" name="direction1" id="direction1" value="North">
+          <label for="direction1">North</label>
+          <input type="checkbox" name="direction2" id="direction2" value="Northeast">
+          <label for="direction2">Northeast</label>
+          <input type="checkbox" name="direction3" id="direction3" value="Northwest">
+          <label for="direction3">Northwest</label>
+          <input type="checkbox" name="direction4" id="direction4" value="South">
+          <label for="direction4">South</label>
+          <input type="checkbox" name="direction5" id="direction5" value="Southeast">
+          <label for="direction5">Southeast</label>
+          <input type="checkbox" name="direction6" id="direction6" value="Southwest">
+          <label for="direction6">Southwest</label>
+          <input type="checkbox" name="direction7" id="direction7" value="East">
+          <label for="direction7">East</label>
+          <input type="checkbox" name="direction8" id="direction8" value="West">
+          <label for="direction8">West</label>
+          <br>
+          <br>
+          <div class="inputBox">
+            <input type="date" name="date" id="date" class="inputData" required/>
+            <label for="date">Date</label>
+          </div>
+          <br>
+          <div class="inputBox">
+            <input type="number" name="value" id="value-wind" class="inputData" required/>
+            <label for="value">m/s</label>
+          </div>
+          <br>
+          <button onclick="sendXML()">Send (XMLHttpRequest)</button>
+          <button onclick="sendFetch()">Send (Fetch)</button>
+        </fieldset>
+      </form>
+
+      <br>
+
+      <form action="">
+        <fieldset>
+          <legend><b>Cloud coverage - %</b></legend>
+          <p>City:</p>
+          <input type="radio" name="place" id="Horsens4" value="Horsens">
+          <label for="Horsens4">Horsens</label>
+          <input type="radio" name="place" id="Aarhus4" value="Aarhus">
+          <label for="Aarhus4">Aarhus</label>
+          <input type="radio" name="place" id="Copenhagen4" value="Copenhagen">
+          <label for="Copenhagen4">Copenhagen</label>
+          <br>
+          <br>
+          <div class="inputBox">
+            <input type="date" name="date" id="date" class="inputData" required/>
+            <label for="date">Date</label>
+          </div>
+          <br>
+          <div class="inputBox">
+            <input type="number" name="value" id="valuecloud" class="inputData" required/>
+            <label for="value">%</label>
+          </div>
+          <br>
+          <button onclick="sendXML()">Send (XMLHttpRequest)</button>
+          <button onclick="sendFetch()">Send (Fetch)</button>
+        </fieldset>
+      </form>
+       -->
+    </div>
+  </body>
+</html>
