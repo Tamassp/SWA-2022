@@ -35,72 +35,54 @@ const createForecastTable = () => {
 
 }
 
-const forecasts = [
-    {
-    "time": 456,
-    'temperature': 45,
-    'precipitation': 44,
-    'wind_speed': 11,
-    'cloud_coverage': 22
+const getForecast = (city) => {
+    fetch(`http://localhost:8080/forecast/${city}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
     },
-    {
-    "time": 111,
-    'temperature': 11,
-    'precipitation': 213,
-    'wind_speed': 121,
-    'cloud_coverage': 123
-    }
-]
+  })
+    .then((response) => (response.ok ? response : Promise.reject(response)))
+    .then((res) => res.json())
+    .then((data) => {
+        for(let i = 0; i < 96; i+=4) {
+            appendForecasts(data[i], data[i+1], data[i+2], data[i+3]);
+        }
+        //let textArea = document.getElementById("forecastTextArea");
+        //let structuredData = JSON.stringify(data, null, 3);
+        //console.log("STRUCTURED DATA: " + structuredData);
+        //textArea.value = structuredData;
+    })
+    .catch((error) => {
+      console.log("error");
+    });
+    
+}
 
-// const forecasts2 = [{"type": "temperature",
-//   "time": "2019-07-31T10:07:00.000Z",
-//   "place": "Aarhus",
-//   "from": 19,
-//   "to": 22,
-//   "unit": "C"},
-//  {"type": "precipitation",
-//   "time": "2019-07-31T10:07:00.000Z",
-//   "place": "Aarhus",
-//   "from": 0.0,
-//   "to": 0.5,
-//   "unit": "mm",
-//   "precipitation_types": ["rain"]},
-//  {"type": "wind speed",
-//   "time": "2019-07-31T10:07:00.000Z",
-//   "place": "Aarhus",
-//   "from": 4,
-//   "to":6,
-//   "unit": "m/s",
-//   "directions": ["South", "Southwest"]},
-// {"type": "cloud coverage",
-//   "time": "2019-07-31T10:07:00.000Z",
-//   "place": "Aarhus",
-//   "from": 75,
-//   "to":100,
-//   "unit": "%"}]
 
 // The function below will accept a single forecast item and its index
-const appendForecasts = (singleForecast, city) => {
+const appendForecasts = (singleForecast, singleForecast2, singleForecast3, singleForecast4) => {
     const forecastTable = document.querySelector('.forecastTable') // Find the table we created
     let forecastTableBodyRow = document.createElement('tr') // Create the current table row
     forecastTableBodyRow.className = 'forecastTableBodyRow'
-    console.log(city)
+    // console.log(city)
     //We need to check if
     //create the 5 column cells that will be appended to the current table row
+    //console.log("TIME: " + singleForecast.time);
     let time = document.createElement('td')
     time.innerText = singleForecast.time
 
     let temperature = document.createElement('td')
-    temperature.innerText = singleForecast.temperature
+    temperature.innerText = singleForecast.from + '...' + singleForecast.to
     
     let precipitation = document.createElement('td')
-    precipitation.innerText = singleForecast.precipitation
+    precipitation.innerText = singleForecast2.from + '...' + singleForecast2.to + '(' + singleForecast2.precipitation_types + ')'
     
     let windSpeed = document.createElement('td')
-    windSpeed.innerText = singleForecast.wind_speed
+    windSpeed.innerText = singleForecast3.from +'...' + singleForecast3.to + '(' + singleForecast3.directions + ')'
 
     let cloudCoverage = document.createElement('td')
-    cloudCoverage.innerText = singleForecast.cloud_coverage
+    cloudCoverage.innerText = singleForecast4.from + '...' + singleForecast4.to
     
 
     forecastTableBodyRow.append(time, temperature, precipitation, windSpeed, cloudCoverage) // Append all 5 cells to the table row
@@ -108,7 +90,3 @@ const appendForecasts = (singleForecast, city) => {
 }
 
 createForecastTable();
-appendForecasts(forecasts[0], 'Horsens')
-appendForecasts(forecasts[1], 'Aarhus')
-appendForecasts(forecasts[1], 'Aarhus')
-
