@@ -11,7 +11,7 @@
   <body>
     <div class="box">
 
-      <form action="">
+      <form action="" id="temperatureform">
         <fieldset>
           <legend><b>Temperature - °C</b></legend>
           <p>City:</p>
@@ -35,12 +35,13 @@
           <br>
           <button onclick="sendTemperatureXML()">Send (XMLHttpRequest)</button>
           <button onclick="sendTemperatureFetch()">Send (Fetch)</button>
+          <span id="errorSpan" style="color: red"></span>
         </fieldset>
       </form>
 
       <br>
 
-      <!-- <form action="">
+      <!-- <form action="" id="preciform">
         <fieldset>
           <legend><b>Precipitation - mm</b></legend>
           <p>City:</p>
@@ -74,12 +75,17 @@
           <br>
           <button onclick="sendXML()">Send (XMLHttpRequest)</button>
           <button onclick="sendFetch()">Send (Fetch)</button>
+          <span id="errorSpan" style="color: red"></span>
+          <br>
+          <br>
+          <button onclick="sendXML()">Send (XMLHttpRequest)</button>
+          <button onclick="sendFetch()">Send (Fetch)</button>
         </fieldset>
       </form>
 
       <br>
 
-      <form action="">
+      <form action="" id="windform">
         <fieldset>
           <legend><b>Wind speed - m/s</b></legend>
           <p>City:</p>
@@ -122,12 +128,14 @@
           <br>
           <button onclick="sendXML()">Send (XMLHttpRequest)</button>
           <button onclick="sendFetch()">Send (Fetch)</button>
+          <span id="errorSpan" style="color: red"></span>
+          <br>
         </fieldset>
       </form>
 
       <br>
 
-      <form action="">
+      <form action="" id="cloudform">
         <fieldset>
           <legend><b>Cloud coverage - %</b></legend>
           <p>City:</p>
@@ -151,6 +159,8 @@
           <br>
           <button onclick="sendXML()">Send (XMLHttpRequest)</button>
           <button onclick="sendFetch()">Send (Fetch)</button>
+          <span id="errorSpan" style="color: red"></span>
+          <br>
         </fieldset>
       </form>
        -->
