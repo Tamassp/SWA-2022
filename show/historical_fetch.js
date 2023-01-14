@@ -32,7 +32,7 @@ function weatherFactory(type, value, time, place) {
     }
 }
 
-//TEMPERATURE FACTORY
+//PRECIPITATION FACTORY
 function precipitationFactory(type, value, time, place, precipitation_type) {
     const weather = weatherFactory(type, value, time, place);
     const getPrecipitationType = () => precipitation_type;
@@ -58,7 +58,6 @@ function windSpeedFactory(type, value, time, place, direction) {
         ...weather, getDirection, setDirection
     }
 }
-
 
 
 function update(city) {

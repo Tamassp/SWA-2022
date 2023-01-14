@@ -1,5 +1,4 @@
 //CREATING THE FORECAST TABLE TO SHOW THE FORECAST DATA
-console.log("SCript");
 const forecastDiv = document.querySelector("div.forecastTableDiv") //Find the Forecast Table in our html
 
 let forecastTableHeaders = ['Time', 'Temperature', 'Precipitation', 'Wind Speed', 'Cloud Coverage']

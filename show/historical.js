@@ -5,6 +5,7 @@
 //         type = _type;
 //     }
 
+
 //     const getValue = () => value;
 //     const setValue = (_value) => {
 //         value = _value;
@@ -60,6 +61,49 @@
 // }
 
 
+//import {cities} from "./weatherDataProto.js";
+
+
+// Weather data model with prototypes
+const weatherPrototype = {
+    getTemperature() {
+        console.log("THIS: " + this)
+        return this.temperature;
+    },
+    setTemperature(temperature) {
+        console.log("THIS2: " + this)
+        this.temperature = temperature;
+    },
+    getPrecipitation() {
+        return this.precipitation;
+    },
+    setPrecipitation(precipitation) {
+        this.precipitation = precipitation;
+    },
+    getWindSpeed() {
+        return this.windSpeed;
+    },
+    setWindSpeed(windSpeed) {
+        this.windSpeed = windSpeed;
+    },
+    getCloudCoverage() {
+        return this.cloudCoverage;
+    },
+    setCloudCoverage(cloudCoverage) {
+        this.cloudCoverage = cloudCoverage;
+    }
+}
+
+const cities = [
+    //__proto__: weatherPrototype is used to set the prototype of the object
+    { name: "Horsens",  __proto__: weatherPrototype },
+    { name: "Aarhus", __proto__: weatherPrototype },
+    { name: "Copenhagen", __proto__: weatherPrototype },
+];
+
+//A BETTER SOLUTION WITH CONSTRUCTOR FUNCTIONS IS IN WEATHERDATACLASS.JS
+
+
 
 function update(city) {
     // console.log("CITY" + city);
@@ -78,19 +122,25 @@ const getLastMeasurement = (city) => {
         for(let i = 0; i < 4; i++) {
             switch(data[length - i].type) {
                 case "temperature":
-                    document.getElementById("temperature").innerHTML = `${data[length - i].value} °C`;
+                    cities.find(x => x.name === `${city}`).setTemperature(data[length - i].value);
+                    //document.getElementById("temperature").innerHTML = `${data[length - i].value} °C`;
                     break;
                 case "precipitation":
-                    document.getElementById("precipitation").innerHTML = `${data[length - i].value} mm`;
+                    cities.find(x => x.name === `${city}`).setPrecipitation(data[length - i].value);
+                    //document.getElementById("precipitation").innerHTML = `${data[length - i].value} mm`;
                     break;
                 case "wind speed":
-                    document.getElementById("windSpeed").innerHTML = `${data[length - i].value} m/s`;
+                    cities.find(x => x.name === `${city}`).setWindSpeed(data[length - i].value);
+                    //document.getElementById("windSpeed").innerHTML = `${data[length - i].value} m/s`;
                     break;
                 case 'cloud coverage':
-                    document.getElementById("cloudCoverage").innerHTML = `${data[length - i].value} %`;
+                    cities.find(x => x.name === `${city}`).setCloudCoverage(data[length - i].value);
+                    //document.getElementById("cloudCoverage").innerHTML = `${data[length - i].value} %`;
                     break;
             }
         }
+        console.log(cities);
+        updateUI(city);
     }
     request.onerror = () => {
         console.log("error");
@@ -136,7 +186,21 @@ const getHistoricalData = (city) => {
     request.send();
 };
 
+
+const updateUI = (city) => {
+    document.getElementById("temperature").innerHTML = `${cities.find(x => x.name === `${city}`).getTemperature()} °C`;
+    document.getElementById("precipitation").innerHTML = `${cities.find(x => x.name === `${city}`).getPrecipitation()} °C`;
+    document.getElementById("windSpeed").innerHTML = `${cities.find(x => x.name === `${city}`).getWindSpeed()} °C`;
+    document.getElementById("cloudCoverage").innerHTML = `${cities.find(x => x.name === `${city}`).getCloudCoverage()} °C`;
+}
+    
+
+
 //Sets up the data for Horsens by default
 getLastMeasurement('Horsens');
 getHistoricalData('Horsens');
 getForecast('Horsens');
+
+
+
+
