@@ -115,7 +115,12 @@ function update(city) {
 
 const getLastMeasurement = (city) => {
     const request = new XMLHttpRequest();
+    //preperation for the request (not opens anything yet)
     request.open('GET', `http://localhost:8080/data/${city}`);
+    
+    //Optionally
+    //request.responseType = 'json';
+
     request.onload = () => {
         const data = JSON.parse(request.responseText);
         const length = data.length - 1;
@@ -145,6 +150,7 @@ const getLastMeasurement = (city) => {
     request.onerror = () => {
         console.log("error");
     };
+    //Initiates the request
     request.send();
 };
 
@@ -180,10 +186,24 @@ const getHistoricalData = (city) => {
         document.getElementById("totalPrecipitation").innerHTML = `${totalPrecipitation.toFixed(4)} mm`;
         document.getElementById("averageWindSpeed").innerHTML = `${(averageWindSpeed / data.length).toFixed(4)} m/s`;
     };
+    //checks if the request failed
     request.onerror = () => {
         console.log("error");
     };
     request.send();
+
+
+
+    //optimalization for error handling could be
+    /*
+    request.onload = () => {
+        if (request.status >= 400) {
+            reject(request.response);
+        } else {
+            resolve(request.response);
+        }
+    }
+    */
 };
 
 

@@ -100,41 +100,43 @@ function getLastMeasurement(city) {
 };
 
 const getHistoricalData = (city) => {
-    fetch(`http://localhost:8080/data/${city}`, {
+   const promise = fetch(`http://localhost:8080/data/${city}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
   })
+  promise
     .then((response) => (response.ok ? response : Promise.reject(response)))
+    //converting to json
     .then((res) => res.json())
-    .then((data) => {
-        let minTemp = data[0].value;
-        let maxTemp = data[0].value;
+    .then((userData) => {
+        let minTemp = userData[0].value;
+        let maxTemp = userData[0].value;
         let totalPrecipitation = 0;
         let averageWindSpeed = 0;
         //LATEST DAY 96 LENGHT
         for (let i = 0; i < 96; i++) {
-            if (data[i].type === "temperature") {
-                if (data[i].value < minTemp) {
-                    minTemp = data[i].value;
+            if (userData[i].type === "temperature") {
+                if (userData[i].value < minTemp) {
+                    minTemp = userData[i].value;
                 }
-                if (data[i].value > maxTemp) {
-                    maxTemp = data[i].value;
+                if (userData[i].value > maxTemp) {
+                    maxTemp = userData[i].value;
                 }
             }
-            if (data[i].type === "precipitation") {
-                totalPrecipitation += data[i].value;
+            if (userData[i].type === "precipitation") {
+                totalPrecipitation += userData[i].value;
             }
-            if (data[i].type === "wind speed") {
-                averageWindSpeed += data[i].value;
+            if (userData[i].type === "wind speed") {
+                averageWindSpeed += userData[i].value;
             }
         }
 
         document.getElementById("minTemp").innerHTML = `${minTemp} °C`;
         document.getElementById("maxTemp").innerHTML = `${maxTemp} °C`;
         document.getElementById("totalPrecipitation").innerHTML = `${totalPrecipitation.toFixed(4)} mm`;
-        document.getElementById("averageWindSpeed").innerHTML = `${(averageWindSpeed / data.length).toFixed(4)} m/s`;
+        document.getElementById("averageWindSpeed").innerHTML = `${(averageWindSpeed / userData.length).toFixed(4)} m/s`;
     })
     .catch((error) => console.log(`Error: ${error}`));
 };
