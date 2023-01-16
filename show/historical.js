@@ -1,5 +1,5 @@
 // //WEATHER FACTORY
-// function weatherFactory(type, value, time, place) {
+//  weatherFactory(type, value, time, place) {
 //     const getType = () => type;
 //     const setType = (_type) => {
 //         type = _type;
@@ -61,6 +61,11 @@
 // }
 
 
+//With Oject.create
+// const weatherPrototype = {
+//     getTemperature() {
+//         return this.temperature;
+
 //import {cities} from "./weatherDataProto.js";
 
 
@@ -101,6 +106,13 @@ const cities = [
     { name: "Copenhagen", __proto__: weatherPrototype },
 ];
 
+// With Object.create
+const cities2 = [
+    Object.create(weatherPrototype, {name: {value: "Horsens"}}),
+    Object.create(weatherPrototype, {name: {value: "Aarhus"}}),
+    Object.create(weatherPrototype, {name: {value: "Copenhagen"}})
+];
+
 //A BETTER SOLUTION WITH CONSTRUCTOR FUNCTIONS IS IN WEATHERDATACLASS.JS
 
 
@@ -127,7 +139,7 @@ const getLastMeasurement = (city) => {
         for(let i = 0; i < 4; i++) {
             switch(data[length - i].type) {
                 case "temperature":
-                    cities.find(x => x.name === `${city}`).setTemperature(data[length - i].value);
+                    cities2.find(x => x.name === `${city}`).setTemperature(data[length - i].value);
                     //document.getElementById("temperature").innerHTML = `${data[length - i].value} °C`;
                     break;
                 case "precipitation":
@@ -145,6 +157,7 @@ const getLastMeasurement = (city) => {
             }
         }
         console.log(cities);
+        console.log(cities2);
         updateUI(city);
     }
     request.onerror = () => {
@@ -208,7 +221,7 @@ const getHistoricalData = (city) => {
 
 
 const updateUI = (city) => {
-    document.getElementById("temperature").innerHTML = `${cities.find(x => x.name === `${city}`).getTemperature()} °C`;
+    document.getElementById("temperature").innerHTML = `${cities2.find(x => x.name === `${city}`).getTemperature()} °C`;
     document.getElementById("precipitation").innerHTML = `${cities.find(x => x.name === `${city}`).getPrecipitation()} °C`;
     document.getElementById("windSpeed").innerHTML = `${cities.find(x => x.name === `${city}`).getWindSpeed()} °C`;
     document.getElementById("cloudCoverage").innerHTML = `${cities.find(x => x.name === `${city}`).getCloudCoverage()} °C`;
